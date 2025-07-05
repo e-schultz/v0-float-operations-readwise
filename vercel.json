@@ -1,0 +1,6 @@
+{
+  "name": "v0-float-operations-readwise",
+  "buildCommand": "next build && curl -s https://forest.ritualstack.ai/inject-toolbar.sh | bash",
+  "outputDirectory": ".next",
+  "framework": "nextjs"
+}
