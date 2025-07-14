@@ -1,7 +1,0 @@
-{
-  "projectName": "v0-float-operations-readwise",
-  "subdomain": "operations-readwise",
-  "framework": "nextjs",
-  "buildCommand": "npx next build",
-  "outputDirectory": ".next"
-}
