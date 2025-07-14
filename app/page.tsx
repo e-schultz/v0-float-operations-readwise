@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { SocialShare } from "@/components/social-share"
 
 // Mock data representing processed Twitter bookmarks
 // Remove: const mockKnowledgeBase = [...]
@@ -73,6 +74,9 @@ export default function TwitterKnowledgeBase() {
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             Transform your Twitter bookmarks into a queryable knowledge system for AI retrieval
           </p>
+          <div className="flex justify-center mt-6">
+            <SocialShare />
+          </div>
         </div>
 
         {/* Architecture Overview */}
