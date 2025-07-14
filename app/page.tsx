@@ -185,37 +185,71 @@ export default function TwitterKnowledgeBase() {
         )}
 
         {/* Results */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {results.map((item) => (
             <Card key={item.id} className="bg-slate-800/50 border-slate-700 hover:bg-slate-800/70 transition-colors">
               <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-blue-400 font-medium">{item.author}</span>
+                {/* Header with author, date, and source link */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-blue-400 font-medium text-lg">{item.author}</span>
                     <span className="text-slate-500">•</span>
-                    <span className="text-slate-400 text-sm">{item.timestamp}</span>
+                    <span className="text-slate-400">{item.timestamp}</span>
                   </div>
                   {item.source_url && (
-                    <a href={item.source_url} target="_blank" rel="noopener noreferrer">
-                      <Badge variant="outline" className="text-xs hover:bg-slate-700">
-                        Source
+                    <a
+                      href={item.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      <Badge variant="outline" className="text-xs hover:bg-slate-700 border-blue-400/50">
+                        View Source
                       </Badge>
                     </a>
                   )}
                 </div>
 
-                <p className="text-white mb-4 leading-relaxed">{item.content}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs bg-slate-700 text-slate-300">
-                      #{tag}
-                    </Badge>
-                  ))}
+                {/* Content with better typography */}
+                <div className="prose prose-invert max-w-none mb-6">
+                  <div className="text-slate-100 leading-relaxed whitespace-pre-wrap text-base">{item.content}</div>
                 </div>
+
+                {/* Tags with better spacing */}
+                {item.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-600">
+                    <span className="text-slate-400 text-sm mr-2">Tags:</span>
+                    {item.tags.map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="text-xs bg-slate-700/70 text-slate-300 hover:bg-slate-600 transition-colors cursor-pointer"
+                        onClick={() => {
+                          setQuery(tag)
+                          handleSearch()
+                        }}
+                      >
+                        #{tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
+
+          {/* Empty state */}
+          {results.length === 0 && !isLoading && !error && (
+            <Card className="bg-slate-800/30 border-slate-700">
+              <CardContent className="p-12 text-center">
+                <div className="text-slate-400 mb-4">
+                  <Search className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <h3 className="text-lg font-medium mb-2">No results found</h3>
+                  <p className="text-sm">Try adjusting your search terms or category filters</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Implementation Guide */}
